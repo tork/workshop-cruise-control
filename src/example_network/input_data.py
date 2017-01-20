@@ -54,6 +54,8 @@ def extract_images(filename):
     data = numpy.frombuffer(buf, dtype=numpy.uint8)
     data = data.reshape(num_images, rows, cols, 1)
     return data
+def dense_to_odd_even(labels_dense):
+    return (labels_dense % 2)[:,None].astype(float)
 def dense_to_one_hot(labels_dense, num_classes=10):
   """Convert class labels from scalars to one-hot vectors."""
   num_labels = labels_dense.shape[0]
@@ -61,7 +63,7 @@ def dense_to_one_hot(labels_dense, num_classes=10):
   labels_one_hot = numpy.zeros((num_labels, num_classes))
   labels_one_hot.flat[index_offset + labels_dense.ravel()] = 1
   return labels_one_hot
-def extract_labels(filename, one_hot=False):
+def extract_labels(filename, odd_even=False, one_hot=False):
   """Extract the labels into a 1D uint8 numpy array [index]."""
   print('Extracting', filename)
   with gzip.open(filename) as bytestream:
@@ -73,6 +75,8 @@ def extract_labels(filename, one_hot=False):
     num_items = _read32(bytestream)
     buf = bytestream.read(num_items)
     labels = numpy.frombuffer(buf, dtype=numpy.uint8)
+    if odd_even:
+        return dense_to_odd_even(labels)
     if one_hot:
       return dense_to_one_hot(labels)
     return labels
@@ -132,7 +136,7 @@ class DataSet(object):
       assert batch_size <= self._num_examples
     end = self._index_in_epoch
     return self._images[start:end], self._labels[start:end]
-def read_data_sets(train_dir, fake_data=False, one_hot=False):
+def read_data_sets(train_dir, fake_data=False, odd_even=False, one_hot=False):
   class DataSets(object):
     pass
   data_sets = DataSets()
@@ -149,11 +153,11 @@ def read_data_sets(train_dir, fake_data=False, one_hot=False):
   local_file = maybe_download(TRAIN_IMAGES, train_dir)
   train_images = extract_images(local_file)
   local_file = maybe_download(TRAIN_LABELS, train_dir)
-  train_labels = extract_labels(local_file, one_hot=one_hot)
+  train_labels = extract_labels(local_file, odd_even=odd_even, one_hot=one_hot)
   local_file = maybe_download(TEST_IMAGES, train_dir)
   test_images = extract_images(local_file)
   local_file = maybe_download(TEST_LABELS, train_dir)
-  test_labels = extract_labels(local_file, one_hot=one_hot)
+  test_labels = extract_labels(local_file, odd_even=odd_even, one_hot=one_hot)
   validation_images = train_images[:VALIDATION_SIZE]
   validation_labels = train_labels[:VALIDATION_SIZE]
   train_images = train_images[VALIDATION_SIZE:]

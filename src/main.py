@@ -10,7 +10,7 @@ from model import FFNN
 
 def main():
     # fixed seed for reproducibility
-    np.random.seed(0)
+    # np.random.seed(0)
 
     # load dataset
     dataset_full = data.titanic()
@@ -67,14 +67,18 @@ def main():
                     break
         # evaluate final model on the unseen test set.
         # this is the ultimate test on how well the model generalizes.
-        loss_test, actual_test = sess.run([model.loss, model.y], feed_dict=feed_test)
+        loss_test, actual_test = sess.run([model.loss, model.output], feed_dict=feed_test)
         accuracy_test = (actual_test.round() == dataset_test.y).sum() / float(len(actual_test))
         print 'test dataset: loss={}, accuracy={}'.format(loss_test, accuracy_test)
 
         # evaluate your own values in test/custom.csv
-        # dataset_custom = data.titanic('test/custom.csv', norm_stats=dataset_full.norm_stats, ohot_stats=dataset_full.ohot_stats, shuffle=False)
-        # feed_custom = { model.input: dataset_custom.x, model.ideal: dataset_custom.y }
-        # prediction_custom = sess.run(model.y, feed_dict=feed_custom)
+        # dataset_custom = data.titanic('test/custom.csv',
+        #     norm_stats=dataset_full.norm_stats,
+        #     ohot_stats=dataset_full.ohot_stats,
+        #     shuffle=False,
+        #     read_ideal=False)
+        # feed_custom = { model.input: dataset_custom.x }
+        # prediction_custom = sess.run(model.output, feed_dict=feed_custom)
         # print 'predicted survival rate: {}'.format(prediction_custom)
 
 if __name__ == '__main__':
