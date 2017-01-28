@@ -41,7 +41,7 @@ class Dataset(object):
         super(Dataset, self).__init__()
         assert x.shape[0] == y.shape[0]
         self.nvars = x.shape[1]
-        self.nclasses = y.max()
+        self.nout = y.max()
         self.x = x
         self.y = y
         self.norm_stats = norm_stats

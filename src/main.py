@@ -19,7 +19,7 @@ def main():
     dataset_train, dataset_valid = dataset_train.split(0.8)
 
     # create network
-    model = FFNN(dataset_full.nvars)
+    model = FFNN(dataset_full.nvars, dataset_full.nout)
     model.build()
 
     # a saver is used for storing and restoring the model during training.

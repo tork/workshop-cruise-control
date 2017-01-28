@@ -2,11 +2,14 @@ import numpy as np
 import tensorflow as tf
 
 class FFNN(object):
-    def __init__(self, nvars):
+    def __init__(self, nvars, nout):
         super(FFNN, self).__init__()
         self.nvars = nvars
+        self.nout = nout
 
     def build(self):
+        # <Your code goes here>
+
         ##############
         ### TASK 1 ###
         # Define your network! Hint: Look at the model code in
@@ -14,13 +17,15 @@ class FFNN(object):
         # as long as you get the layer sizes right.
         #
         # The network will model whether or not a passenger survived Titanic.
-        # We will use a single output neuron to signal this.
-        # The number of input variables is stored in self.nvars.
+        #
+        # Predefined properties:
+        # self.nvars: the number of input variables
+        # self.nout: the number of output neurons
         #
         # Some properties need to be set, in order for the code to work:
         # self.input: placeholder for input data
         # self.output: the output layer
-        # self.loss: the loss (some sort of difference between actual and ideal output)
+        # self.loss: the loss (distance between actual and ideal output)
         # self.train: an operation for training the network (aka. optimizer)
         # self.ideal: placeholder for ideal data
         # A property can be set like so: self.some_number = 123
@@ -34,7 +39,7 @@ class FFNN(object):
         ##############
         ### TASK 2 ###
         # With a working network in place, try getting the XOR-test to run by
-        # adding a hidden layer. Adding a hidden layer is created the same way
+        # adding a hidden layer. A hidden layer is created the same way
         # as the output layer, with it's own weights and bias. The data should
         # then flow from the input layer, through the hidden,
         # before reaching the output layer.
@@ -59,7 +64,19 @@ class FFNN(object):
         ### TASK 5 ###
         # What does your network think of your own chances of surviving Titanic?
         # Enter your own details in test/custom.csv.
+        # Here is an example:
+        # "pclass","sex","age","sibsp","parch"
+        # 1,male,26,1,2
         # Add as many rows as you wish.
         # In src/main.py, uncomment lines 75 through 82.
         # Start training the model, and read your survival chances!
         # 1.0 = live to tell the tale, 0.0 = dead as a dodo.
+
+        #############
+        ### BONUS ###
+        # See if you can improve the accuracy by making other changes to the
+        # network. Things to try:
+        # Adjust the number of hidden neurons
+        # Change hidden layer activation function (relu perhaps? Read APIs)
+        # Use a different optimizer (other than gradient descent)
+        # See how adding more layers affects learning
