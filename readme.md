@@ -1,6 +1,8 @@
 # Cruise control
 Denne workshopen tar for seg maskinlæring, eksemplifisert gjennom nevrale nettverk og [Tensorflow](https://www.tensorflow.org).
 
+Målet er å modellere hvilke passasjerer som overlever Titanic-forliset. Oppgavene er utdypet i `src/model.py`.
+
 ## Forberedelser
 Miljøet må gjøres klart, og data lastes ned på forhånd. Før du går i gang med oppgaven, gjør `git pull` så du har siste versjon.
 
