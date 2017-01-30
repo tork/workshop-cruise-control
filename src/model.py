@@ -43,10 +43,11 @@ class FFNN(object):
         ##############
         ### TASK 2 ###
         # With a working network in place, try getting the XOR-test to run by
-        # adding a hidden layer. A hidden layer is created the same way
-        # as the output layer, with it's own weights and bias. The data should
+        # adding a hidden layer. A hidden layer is created similarly
+        # to the output layer, with it's own weights and bias. The data should
         # then flow from the input layer, through the hidden,
         # before reaching the output layer.
+        # Hint: Use tf.nn.relu as the hidden layer activation function.
         # The hidden layer network should perform similarly to the regular one,
         # when applied to the Titanic dataset.
 
