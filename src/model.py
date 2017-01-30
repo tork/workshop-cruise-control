@@ -35,6 +35,9 @@ class FFNN(object):
         # The test tries to learn from the AND and XOR operators.
         # Any network should ideally be able to learn AND.
         # Only networks with one or more hidden layers are able to learn XOR.
+        #
+        # Once the AND-test is working, try learning from the Titanic dataset:
+        # ./src/main.py
 
         ##############
         ### TASK 2 ###
@@ -52,6 +55,8 @@ class FFNN(object):
         # Because neural nets are initialized randomly, you should probably
         # train about 10 models and take the average accuracy for it to mean
         # something.
+        # If 10 samples takes too long, feel free to use a lower number.
+        # Start training by running ./src/main.py
 
         ##############
         ### TASK 4 ###

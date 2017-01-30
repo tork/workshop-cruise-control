@@ -65,15 +65,15 @@ y_ = tf.placeholder('float', [None, 1])
 
 # The learning algorithm needs a value to minimize. In this example, we simply
 # use the squared difference between ideal (y_) and actual (y) values.
-squared_error = tf.pow(y - y_, 2)
+loss = tf.pow(y - y_, 2)
 # A simple way to monitor how well the learning process is doing, is to
 # look at the average error every so often.
-mean_error = tf.reduce_mean(squared_error)
+mean_loss = tf.reduce_mean(loss)
 
 # A learning algorithm is needed to adjust the network according to the loss.
 # Tensorflow offers a range of optimizers (learning algorithms),
 # including classic gradient descent implemented through backpropagation.
-train = tf.train.GradientDescentOptimizer(0.01).minimize(squared_error)
+train = tf.train.GradientDescentOptimizer(0.01).minimize(loss)
 # 0.01 is the learning rate.
 
 
@@ -90,7 +90,7 @@ for epoch in range(5000):
     # Retrieve batches of training samples
     batch_xs, batch_ys = mnist.train.next_batch(100)
     # Run training of batch
-    [_, loss] = sess.run([train, mean_error],
+    [_, loss] = sess.run([train, mean_loss],
         feed_dict={x: batch_xs, y_: batch_ys})
     # Print the average error every so often
     if not epoch % 100:
