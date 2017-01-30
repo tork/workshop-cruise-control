@@ -35,6 +35,7 @@ class FFNN(object):
         # The test tries to learn from the AND and XOR operators.
         # Any network should ideally be able to learn AND.
         # Only networks with one or more hidden layers are able to learn XOR.
+        # We recommend using a learning rate of 0.1 for the tests.
         #
         # Once the AND-test is working, try learning from the Titanic dataset:
         # ./src/main.py
