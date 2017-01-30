@@ -25,7 +25,7 @@ class FFNN(object):
         # Some properties need to be set, in order for the code to work:
         # self.input: placeholder for input data
         # self.output: the output layer
-        # self.loss: the loss (distance between actual and ideal output)
+        # self.mean_loss: the mean loss (mean distance between actual and ideal output)
         # self.train: an operation for training the network (aka. optimizer)
         # self.ideal: placeholder for ideal data
         # A property can be set like so: self.some_number = 123

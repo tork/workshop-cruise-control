@@ -44,8 +44,8 @@ def main():
             # validate model
             if not epoch % validation_frequency:
                 # compute training and validation loss
-                loss_train = sess.run(model.loss, feed_dict=feed_train)
-                loss_valid = sess.run(model.loss, feed_dict=feed_valid)
+                loss_train = sess.run(model.mean_loss, feed_dict=feed_train)
+                loss_valid = sess.run(model.mean_loss, feed_dict=feed_valid)
                 print 'epoch #{}: train={}, valid={}'.format(epoch, loss_train, loss_valid)
 
                 # simple early stop logic.
@@ -67,7 +67,7 @@ def main():
                     break
         # evaluate final model on the unseen test set.
         # this is the ultimate test on how well the model generalizes.
-        loss_test, actual_test = sess.run([model.loss, model.output], feed_dict=feed_test)
+        loss_test, actual_test = sess.run([model.mean_loss, model.output], feed_dict=feed_test)
         accuracy_test = (actual_test.round() == dataset_test.y).sum() / float(len(actual_test))
         print 'test dataset: loss={}, accuracy={}'.format(loss_test, accuracy_test)
 
